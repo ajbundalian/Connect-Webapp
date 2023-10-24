@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="/css/employer-landing.css" />
+    <link rel="icon" type="image/x-icon" href="/image/Connect Favicon (1).svg">
+    <title>Employer</title>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+          <div class="logo"><a href="#"><img src="/image/Connect Favicon (1).svg" alt="Connect Logo"></a></div>
+          <ul class="links">
+            <li><a href="#" aria-label="Employ People">Employers</a></li>
+            <li><a href="#" aria-label="Apply for Jobs">Job Seeker</a></li>
+            <li><a href="#" aria-label="What is Connect">About</a></li>
+          </ul>
+          <button class="login">Login</button>
+          <div class="toggle_btn">
+            <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+        <div class="dropdown_menu">
+            <li><a href="#" aria-label="Employ People">Employers</a></li>
+            <li><a href="#" aria-label="Apply for Jobs">Job Seeker</a></li>
+            <li><a href="#" aria-label="What is Connect">About</a></li>
+            <li><button class="login">Login</button></li>
+        </div>
+    </header>
+    
+    <main class="body">
+        <div class="opening-container">
+            <div class="opening-container-inside">
+            <div class="opening-left">
+                <p class="opening-left-headline">Employer</p>
+                <h1 class="tagline-employer"> Tap into hidden talent</h1>
+                <p class="tagline-content">Connect aims to connect employers with skilled candidates,
+                     helping them build more diverse teams and inclusive cultures.
+                </p>
+                <p>
+                    <a class="button" href="">Get Started</a>
+                </p>
+            </div>
+            <div class="opening-right">
+                <img width="695" height="470" src="/image/Employer-LandingPage-Picture (2).svg" alt="3D art of a globe building a wall">
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <section class="opening-message">
+                <div class="opening-message-container">
+                    <h2 class="headline-tag">Connecting Everyone</h2>
+                    <h3 class="opening-message-body">
+                        At Connect we believe in the power of diversity and inclusivity in the workplace. 
+                        We are excited to introduce you to an untapped pool of talented people,
+                        who are ready to bring their unique skills and perspectives to your team.
+                    </h3>
+                </div>
+
+            </section>
+        </div>
+
+        <div>
+          
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="footer-col">
+              <h4>CONNECT</h4>
+              <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Email Us</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Accounts</h4>
+              <ul>
+                <li><a href="#">Hire Employees</a></li>
+                <li><a href="#">Apply for a Job</a></li>
+                <li><a href="#">Login</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Follow Us</h4>
+              <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+            <div class="footer-col">
+              <img src="/image/Connect Favicon (1).svg" alt="Connect Logo">
+              <ul>
+                <li class="connect_tag">Connect 2023</li>
+                <li class="connect_tag">Empowering People</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+     </footer>
+  
+  
+      <script>
+        const toggleBtn = document.querySelector('.toggle_btn')
+        const toggleBtnIcon = document.querySelector('.toggle_btn i')
+        const dropDownMenu = document.querySelector('.dropdown_menu')
+  
+        toggleBtn.onclick = function() {
+          dropDownMenu.classList.toggle('open')
+          const isOPen = dropDownMenu.classList.contains('open')
+  
+          toggleBtnIcon.classList = isOPen
+          ? 'fa-solid fa-xmark'
+          : 'fa-solid fa-bars'
+        }
+      </script>
+    
+</body>
+</html>

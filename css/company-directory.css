@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.company-directory {
+    display: block;
+    margin-top: 20px;
+
+}
+
+.company-directory p{
+    margin: 0px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 120%;
+    letter-spacing: 0px;
+    color: rgb(34, 40, 59);
+    text-align: center;
+
+}
+
+.company-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.company-card p{
+    font-family: 'DM Sans', sans-serif;
+    font-size: 30px;
+    font-weight: 300;
+}
+.company-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    text-align: center;
+    aspect-ratio: 1/1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* This centers the content vertically */
+    align-items: center; /* This centers the content horizontally */
+    text-decoration: none; /* Removes underline from anchor */
+    color: black; /* Ensures the company name is in black text */
+}
+
+.company-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+.company-logo {
+    width: 70%; 
+    height: 70%;
+    margin-bottom: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .company-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .company-logo {
+        width: 60%;
+        height: 60%;
+    }
+}
