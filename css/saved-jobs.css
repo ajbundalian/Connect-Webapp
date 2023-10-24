@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h3{
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+.job-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.job-card {
+    display: block;
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit; /* Ensures the text inside anchor remains unchanged */
+}
+
+.job-card:hover {
+    border-color: #666;
+    text-decoration: none; /* Removes the underline from the link */
+}
+
+
+.company-logo {
+    width: 100px;
+    height: auto;
+    display: block;
+    margin: 0 auto 15px;
+}
+
+/* For Responsiveness */
+@media screen and (max-width: 768px) {
+    .job-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
