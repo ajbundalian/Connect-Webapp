@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.profile-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    height: 20vh;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.profile-info h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.edit-profile {
+    text-align: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.work-experience-section, .education-section, .skills-section, .story-section {
+    margin-bottom: 30px;
+}
+
+.job-entry, .education-entry {
+    margin-bottom: 20px;
+}
+
+h4 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.view-all{
+    border: 2px solid transparent;
+    outline: 0;
+    padding: 0 2px;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.view-all:visited{
+    color: #2e0160;
+}
+
+
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-picture {
+        margin: 0 auto 20px auto;
+    }
+
+    h4 {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,23 @@
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-picture {
+        margin: 0 auto 20px auto;
+    }
+
+    h4 {
+        flex-direction: column;
+    }
+}
+
+/* Responsive End*/
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
