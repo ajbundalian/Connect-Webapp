@@ -17,7 +17,104 @@
 /* Responsive End*/
 
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
 }
+
+header {
+    background-color: #f5f5f5;
+    padding: 10px 0;
+    text-align: center;
+}
+
+
+.search-bar-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-bar-section input[type="text"],
+.search-bar-section select {
+    padding: 10px;
+    flex: 1;
+    margin: 10px 0;
+}
+
+.search-bar-section .main-search {
+    flex: 2;  /* Allow more width for main search input */
+    margin-right: 10px;
+}
+
+.results button {
+    padding: 10px 15px;
+    background-color: #7c4dff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 200px; 
+    align-self: center;
+
+}
+
+.search-bar-section button {
+    padding: 10px 15px;
+    background-color: #7c4dff;
+    color: white;
+    border: none;
+    border-radius: 5px; 
+}
+
+.results {
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 600px);
+    justify-content: center;
+    gap: 20px;
+
+}
+
+.job-card {
+    display: flex;  /* make anchor tags behave like block-level elements */
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 20px;  /* make corners more rounded */
+    border: 1px solid gray;
+    text-decoration: none;  /* remove underline from link */
+    color: inherit;  /* use default text color */
+    transition: background-color 0.3s ease;  /* smooth transition */
+
+}
+
+.job-card a{
+    border: none;
+}
+
+.job-card img {
+    max-width: 50px;
+    border-radius: 10px;  /* round the corners of the company logo */
+}
+
+.job-card:hover {
+    background-color: #f5f5f5;  /* light grey background on hover */
+}
+
+.job-card h2, .job-card p {
+    margin: 10px 0;
+}
+
+
+
+.accessibility-checkboxes label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.accessibility-checkboxes input[type="checkbox"] {
+    margin-right: 5px;
+}
+

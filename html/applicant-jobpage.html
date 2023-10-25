@@ -49,21 +49,156 @@
 <!--Navigation Ends Here-->
 
 <!--Body Start-->
-<div>
 
+  <div class="search-bar-section">
+    <!-- Search Bar -->
+    <input type="text" id="main-search-bar" placeholder="Search By Keyword">
 
+    <!-- Basic Filters -->
+    <select name="category" id="category-filter" class="basic-filter">
+        <option value="tech">Tech</option>
+        <!-- ... more options ... -->
+    </select>
 
+    <select name="location" id="location-filter" class="basic-filter">
+        <option value="boston">Boston</option>
+        <!-- ... more options ... -->
+    </select>
 
+    <select name="disability" id="disability-filter" class="basic-filter">
+        <option value="physical">Physical</option>
+        <!-- ... more options ... -->
+    </select>
 
+    <!-- Search Button -->
+    <button>Search</button>
 
+    <!-- More Filters Button -->
+    <button id="toggle-filters-btn" onclick="toggleMoreFilters()">More Filters ⬇️</button>
 
+    <!-- Additional Filters -->
+    <div class="filter" id="more-filters" style="display: none;">
+      <select name="experience-level">
+          <option value="entry">Entry Level</option>
+          <!-- ... more options ... -->
+      </select>
+  
+      <select name="job-type">
+          <option value="full-time">Full Time</option>
+          <!-- ... more options ... -->
+      </select>
+  
+      <!-- Accessibility Radio Buttons -->
+      <div class="accessibility-checkboxes">
+        <label>
+            <input type="checkbox" name="accessibility" value="devices">
+            Accessible Devices
+        </label>
+        <label>
+            <input type="checkbox" name="accessibility" value="buildings">
+            Accessible Buildings
+        </label>
+        <label>
+            <input type="checkbox" name="accessibility" value="environment">
+            Accessible Work Environment
+        </label>
+        <label>
+            <input type="checkbox" name="accessibility" value="assistance">
+            In-Person Assistance
+        </label>
+    </div>
+  </div>
 
-
-
-
-
-
+  <!--Job list Start-->
 </div>
+<section class="results">
+  <div class="job-card">
+      <!-- PHP loop to populate these cards would start here -->
+      <a href="job-details.php" class="job-card">
+        <img src="path-to-company-logo.png" alt="Company Logo">
+        <h2>Job Title</h2>
+        <p>Company Name</p>
+        <p>Location</p>
+        <p>Job Type</p>
+    </a>
+      <!-- PHP loop end -->
+      <button>Connect</button>
+  </div>
+
+  <div class="job-card">
+    <!-- PHP loop to populate these cards would start here -->
+    <a href="job-details.php" class="job-card">
+      <img src="path-to-company-logo.png" alt="Company Logo">
+      <h2>Job Title</h2>
+      <p>Company Name</p>
+      <p>Location</p>
+      <p>Job Type</p>
+  </a>
+    <!-- PHP loop end -->
+    <button>Connect</button>   
+</div>
+
+<div class="job-card">
+  <!-- PHP loop to populate these cards would start here -->
+  <a href="job-details.php" class="job-card">
+    <img src="path-to-company-logo.png" alt="Company Logo">
+    <h2>Job Title</h2>
+    <p>Company Name</p>
+    <p>Location</p>
+    <p>Job Type</p>
+</a>
+  <!-- PHP loop end -->
+  <button>Connect</button>
+</div>
+
+<div class="job-card">
+  <!-- PHP loop to populate these cards would start here -->
+  <a href="job-details.php" class="job-card">
+    <img src="path-to-company-logo.png" alt="Company Logo">
+    <h2>Job Title</h2>
+    <p>Company Name</p>
+    <p>Location</p>
+    <p>Job Type</p>
+</a>
+  <!-- PHP loop end -->
+  <button>Connect</button>
+</div>
+
+<div class="job-card">
+  <!-- PHP loop to populate these cards would start here -->
+  <a href="job-details.php" class="job-card">
+    <img src="path-to-company-logo.png" alt="Company Logo">
+    <h2>Job Title</h2>
+    <p>Company Name</p>
+    <p>Location</p>
+    <p>Job Type</p>
+</a>
+  <!-- PHP loop end -->
+  <button>Connect</button>
+</div>
+
+<div class="job-card">
+  <!-- PHP loop to populate these cards would start here -->
+  <a href="job-details.php" class="job-card">
+    <img src="path-to-company-logo.png" alt="Company Logo">
+    <h2>Job Title</h2>
+    <p>Company Name</p>
+    <p>Location</p>
+    <p>Job Type</p>
+</a>
+  <!-- PHP loop end -->
+  <button>Connect</button>
+</div>
+
+
+
+
+</section>
+  <!--Job list End-->
+
+
+  
+
 <!--Body End-->
 
 
