@@ -5,36 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="icon" type="image/c-icon" href="/image/Connect Favicon (1).svg">
-    <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <link rel="stylesheet" type="text/css" href="../css/signup.css">
     <title>Login - Connect</title>
 </head>
 <body>
 <!-- Login Form-->
-    <div class="wrapper">
-        <img src="/image/Connect Favicon (2).svg" class="logo" alt="Connect Logo">
-        <header>CONNECT</header>
-        <form action="#">
-          <div class="field email" alt="Email Address Field">
-            <div class="input-area" alt="Email Address Field">
-              <input type="text" placeholder="Email Address">
-              <i class="icon fas fa-envelope"></i>
-              <i class="error error-icon fas fa-exclamation-circle"></i>
-            </div>
-            <div class="error error-txt">Email can't be blank</div>
-          </div>
-          <div class="field password" alt="Password Field">
-            <div class="input-area" alt="Password Field">
-              <input type="password" placeholder="Password">
-              <i class="icon fas fa-lock"></i>
-              <i class="error error-icon fas fa-exclamation-circle"></i>
-            </div>
-            <div class="error error-txt">Password can't be blank</div>
-          </div>
-          <input type="submit" value="Sign Up" aria-label="Login Button">
-        </form>
-        <div class="sign-txt">Already have an account? <a href="/login.html">Login now</a></div>
-        <div class="sign-txt2"><a href="#">Privacy Policy</a></div>
-      </div>
+    <div class="container">
+        <div class="signup-form">
+            <img src="../image/Connect Favicon (2).svg" alt="Connect Logo" class="logo">
+            <p class="connect-title">CONNECT</p>
+            
+            <form action="path_to_submit_form" method="POST">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required aria-required="true" placeholder="Email Address">
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required aria-required="true" placeholder="Password">
+                
+                <fieldset>
+                    <legend>User Type:</legend>
+                    <div class="radio-container">
+                        <input type="radio" id="applicant" name="userType" value="applicant" required>
+                        <label for="applicant">Applicant</label>
+                        
+                        <input type="radio" id="jobSeeker" name="userType" value="jobSeeker">
+                        <label for="jobSeeker">Job Seeker</label>
+                    </div>
+                </fieldset>
+
+                <button type="submit" class="signup-btn">Sign Up</button>
+            </form>
+            
+            <p class="login-link">Already have an account? <a href="path_to_login">Login now</a></p>
+            <p class="privacy-policy"><a href="path_to_privacy_policy">Privacy Policy</a></p>
+        </div>
+    </div>
+</body>
+
+</html>
+
     
       <script src="/js/signup.js"></script>
     
