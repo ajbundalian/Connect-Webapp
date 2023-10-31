@@ -10,42 +10,33 @@
 </head>
 <body>
 <!-- Login Form-->
-    <div class="container">
-        <div class="signup-form">
-            <img src="../image/Connect Favicon (2).svg" alt="Connect Logo" class="logo">
-            <p class="connect-title">CONNECT</p>
-            
-            <form action="path_to_submit_form" method="POST">
-                <label for="email">Email Address:</label>
-                <input type="email" id="email" name="email" required aria-required="true" placeholder="Email Address">
-                
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required aria-required="true" placeholder="Password">
-                
-                <fieldset>
-                    <legend>User Type:</legend>
-                    <div class="radio-container">
-                        <input type="radio" id="applicant" name="userType" value="applicant" required>
-                        <label for="applicant">Applicant</label>
-                        
-                        <input type="radio" id="employer" name="userType" value="employer">
-                        <label for="employer">Employer</label>
-                    </div>
-                </fieldset>
-
-                <button type="submit" class="signup-btn">Sign Up</button>
-            </form>
-            
-            <p class="login-link">Already have an account? <a href="path_to_login">Login now</a></p>
-            <p class="privacy-policy"><a href="path_to_privacy_policy">Privacy Policy</a></p>
-        </div>
+<div class="container">
+    <div class="logo">
+        <img class="img-logo" src="../image/Connect Favicon (2).svg" alt="Connect Logo">
     </div>
-</body>
+    <h1>CONNECT</h1>
 
-</html>
+    <form id="signupForm">
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="password" name="password" placeholder="Password" required>
 
-    
-      <script src="/js/signup.js"></script>
+        <div class="user-type">
+            <input type="radio" id="applicant" name="userType" value="applicant" required>
+            <label for="applicant">Applicant</label>
+
+            <input type="radio" id="employer" name="userType" value="employer" required>
+            <label for="employer">Employer</label>
+        </div>
+
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <div class="links">
+        <div class="txt1">Already have an account? <a class="txt1" href="#">Login now</a></div>
+        <a class="txt2" href="#">Privacy Policy</a>
+    </div>
+</div>
+<script src="/js/signup.js"></script>
     
 </body>
 </html>

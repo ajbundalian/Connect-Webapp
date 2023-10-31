@@ -3,129 +3,85 @@
 
 body {
   font-family: 'DM Sans', sans-serif;
-  margin: 0;
-  padding: 0;
+  background-color: #2C3E50;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f4f4f4;
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  height: 100vh;
-  background-color: #f4f4f4;
-}
-
-.card {
-  background-color: #ffffff;
-  padding: 30px;
-  width: 300px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.logo {
-  display: block;
-  width: 100px;
-  height: 100px;
-  margin: 0 auto 15px;
-  margin-bottom: 20px;
-  background-color: #f4f4f4;
-}
-
-.signup-form {
-  text-align: center;
-  font-size: 20px;
   font-weight: 500;
 }
 
-.connect-title{
-  font-style: 'Poppins';
-  font-weight: 900;
-  font-size: 30px;
+.logo{
+  width: 100%;
+  text-align: center;
 }
 
-input[type="email"], input[type="password"], button {
-  width: 90%;
-  height: 2rem;
-  padding: 10px 15px;
-  margin: 10px 0;
-  border: 1px solid #e1e1e1;
-  border-radius: 5px;
-}
-
-input[type='radio']:checked:after{
-  accent-color: #007BFF;
-}
-
-button {
-  background-color: #007BFF;
-  color: #fff;
-  cursor: pointer;
-  border: none;
+.img-logo{
+  width: 50px;
   height: 50px;
 }
 
-button:hover {
-  background-color: #0056b3;
+.container {
+  background-color: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
 }
 
-fieldset {
-  border: none;
-  margin: 15px 0;
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.radio-container {
+input[type="email"], input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1.25rem;
+}
+
+.user-type {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  font-size: 1.25rem;
 }
 
-.radio-container label {
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #3498DB;
+  border: none;
+  border-radius: 4px;
+  color: white;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 1.25rem;
 }
 
-.login-link, .privacy-policy {
-  margin-top: 10px;
-  font-size: 0.9em;
-}
-
-a {
-  color: #007BFF;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-.signup-btn{
-  font-weight: 700;
-  font-size: 25px;
-}
-
-.footer-text {
+.links {
   margin-top: 20px;
-  font-size: 14px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.txt1 a{
+  display: inline-block;
+  text-align: center;
+  color: #3498DB;
+  text-decoration: none;
+  margin: 5px 0;
 }
 
 
-/* Media Query for Tablets and Larger Devices */
-@media only screen and (min-width: 768px) {
-  .card {
-      width: 400px;
-  }
-}
-
-/* Media Query for Desktops and Larger Devices */
-@media only screen and (min-width: 1024px) {
-  .card {
-      width: 500px;
-  }
+.txt2 {
+  display: block;
+  text-align: center;
+  color: #3498DB;
+  text-decoration: none;
+  margin: 5px 0;
 }
