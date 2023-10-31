@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.job-listing-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.job-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#company-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.job-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.job-details span {
+    display: inline-block;
+    margin: 0 10px 10px 0;
+    background-color: #e8e8e8;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.action-buttons {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.action-buttons button{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 1.25rem;
+}
+
+.btn-save-btn {
+    background-color: #007BFF;
+    color: white;
+    
+}
+
+.btn-connect-btn {
+    background-color: #7c4dff;
+    color: white;
+}
+
+.btn-report-btn {
+    background-color: #DC3545;
+    color: white;
+}
+
+.btn-save-btn:hover{
+    color: #007BFF;
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+    border-color: #007BFF;
+}
+
+.btn-connect-btn:hover{
+    color: #7c4dff;
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+    border-color: #7c4dff;
+}
+
+.btn-report-btn:hover{
+    color: #DC3545;
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+    border-color: #DC3545;
+}
+
+.job-description, .accessibility-features {
+    margin-top: 20px;
+}
+
+.accessibility-features ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.accessibility-features li {
+    padding: 5px 0;
+}
+
+/* Media Query for Responsiveness */
+@media screen and (max-width: 600px) {
+    .job-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #company-logo {
+        margin-bottom: 20px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        margin: 5px 0;
+        width: 100%;
+    }
+}
