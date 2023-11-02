@@ -133,7 +133,6 @@ body {
 @media screen and (max-width: 768px) {
     /* Mobile styles */
     .job-details{
-        position: relative;
         display: flex;
         flex-direction: column;
     }
