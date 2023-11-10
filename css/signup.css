@@ -85,3 +85,7 @@ button {
   text-decoration: none;
   margin: 5px 0;
 }
+
+.txt1 a:hover{
+  color: black;
+}

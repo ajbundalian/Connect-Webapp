@@ -40,6 +40,9 @@
 
 <!-- PHP CODE -->
 <?php
+session_start();
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 // Check if the form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
     // Retrieve the form data
@@ -51,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     
     // Get the current date in MM-DD-YYYY format
-    $date_created = date("m-d-Y");
+    $date_created = date("m/d/Y");
 
     // Database connection details
     $host = 'localhost';
@@ -80,11 +83,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
         $stmt->bindParam(':status', $status, PDO::PARAM_INT);
         $stmt->bindParam(':date_created', $date_created);
 
-        // Execute the statement
+
         if ($stmt->execute()) {
 
-            header('Location: login.php');
-            exit; // Prevent the script from running any further
+             // Store user email in session
+            $_SESSION['user_email'] = $email;
+            $_SESSION['user_id'] = $pdo->lastInsertId();
+
+            if ($status == 1) {
+                header("Location: applicant-form.php");
+            } elseif ($status == 2) {
+                header("Location: company-form.php");
+            }
+            exit;
         }
     } catch (\PDOException $e) {
         // Handle any errors
