@@ -9,35 +9,7 @@
     <title>Login - Connect</title>
 </head>
 <body>
-<!-- Login Form-->
-    <div class="wrapper">
-        <img src="/image/Connect Favicon (2).svg" class="logo" alt="Connect Logo">
-        <header>CONNECT</header>
-        <form method="POST">
-          <div class="field email" alt="Email Address Field">
-            <div class="input-area" alt="Email Address Field">
-              <input type="email" name="email" placeholder="Email Address" required>
-              <i class="icon fas fa-envelope"></i>
-              <i class="error error-icon fas fa-exclamation-circle"></i>
-            </div>
-            <div class="error error-txt">Email can't be blank</div>
-          </div>
-          <div class="field password" alt="Password Field">
-            <div class="input-area" alt="Password Field">
-              <input type="password" name="password" placeholder="Password" required>
-              <i class="icon fas fa-lock"></i>
-              <i class="error error-icon fas fa-exclamation-circle"></i>
-            </div>
-            <div class="error error-txt">Password can't be blank</div>
-          </div>
-          <div class="pass-txt"><a href="#">Forgot password?</a></div>
-          <input type="submit" value="Login" aria-label="Login Button">
-        </form>
-        <div class="sign-txt">Not yet member? <a href="../php/singup.php">Signup now</a></div>
-        <div class="sign-txt2"><a href="#">Privacy Policy</a></div>
-      </div>
-
-      <?php
+<?php
 session_start(); // Start the session at the beginning of the script
 
 // Redirect users based on their status
@@ -97,8 +69,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['status'] = $user['status'];
 
+            // Determine and execute the query based on the user's status
+            if ($_SESSION['status'] == 1) {
+            // User is an applicant, query the profile table
+            $stmt = $pdo->prepare("SELECT profile_id FROM profile WHERE user_id = :user_id");
+                } 
+            elseif ($_SESSION['status'] == 2) {
+            // User is a company, query the company table
+            $stmt = $pdo->prepare("SELECT company_id FROM company WHERE user_id = :user_id");
+            } 
+            else {
+            // If status is not 1 or 2, handle the error appropriately
+            echo 'Error: Unrecognized user status.';
+            exit;
+            }
+
+            // Bind the user_id parameter and execute the query
+            $stmt->bindParam(':user_id', $_SESSION['user_id']);
+            $stmt->execute();
+
+            // Fetch the result
+            $result = $stmt->fetch();
+
+            // Check if a result exists for the user and store the appropriate ID in the session
+            if ($result) {
+            $idKey = ($_SESSION['status'] == 1) ? 'profile_id' : 'company_id';
+            $_SESSION[$idKey] = $result[$idKey];
+            }
+
             // Redirect user based on their status
-            redirectToDashboard($user['status']);
+            redirectToDashboard($_SESSION['status']);
         } else {
             // The credentials are incorrect.
             echo "<script>alert('Login failed: Invalid email or password.'); window.location.href='login.php';</script>";
@@ -107,9 +107,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Handle any errors
         echo "Error: " . $e->getMessage();
     }
-}
+
+    }
+$showSuccessMessage = isset($_GET['status']) && $_GET['status'] == 'success';
 // The rest of the page (your HTML form) will be displayed if the user is not redirected
 ?>
+
+<!-- Login Form-->
+    <div class="wrapper">
+        <img src="../image/Connect Favicon (2).svg" class="logo" alt="Connect Logo">
+        <header>CONNECT</header>
+        <form method="POST">
+          <div class="field email" alt="Email Address Field">
+            <div class="input-area" alt="Email Address Field">
+              <input type="email" name="email" placeholder="Email Address" required>
+              <i class="icon fas fa-envelope"></i>
+              <i class="error error-icon fas fa-exclamation-circle"></i>
+            </div>
+            <div class="error error-txt">Email can't be blank</div>
+          </div>
+          <div class="field password" alt="Password Field">
+            <div class="input-area" alt="Password Field">
+              <input type="password" name="password" placeholder="Password" required>
+              <i class="icon fas fa-lock"></i>
+              <i class="error error-icon fas fa-exclamation-circle"></i>
+            </div>
+            <div class="error error-txt">Password can't be blank</div>
+          </div>
+          <div class="pass-txt"><a href="#">Forgot password?</a></div>
+          <input type="submit" value="Login" aria-label="Login Button">
+        </form>
+        <div class="sign-txt">Not yet member? <a href="../php/signup.php">Signup now</a></div>
+        <div class="sign-txt2"><a href="#">Privacy Policy</a></div>
+      </div>
       <!-- <script src="../js/login.js"></script> -->
 
 </body>
