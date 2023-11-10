@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,6 +53,10 @@
 
 
 <?php
+
+session_start(); // Start the session at the beginning of the script
+
+
 $servername = "localhost";
 $username = "root";
 $password = "12345";
@@ -58,15 +65,21 @@ $dbname = "connect";
 // Create connection
 $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
-// Get profile ID from URL or session
-$profileId = isset($_GET['profile_id']) ? (int)$_GET['profile_id'] : 1; // Example profile_id
+// Check if the session variable for profile_id is set, otherwise redirect or handle the error
+if (!isset($_SESSION['profile_id'])) {
+    // Redirect to the login page or handle the error as appropriate
+    exit('Error: Profile ID is not set in the session. Please log in.'); // Or use header('Location: login.php');
+}
+
+$profileId = $_SESSION['profile_id']; // Use the profile_id from the session
+
 
 
 // Fetch user profile data
-$profileStmt = $conn->prepare("SELECT first_name, last_name, city, district FROM 'profile' WHERE profile_id = :profileId");
+$profileStmt = $conn->prepare("SELECT first_name, last_name, city, district FROM 'profile' WHERE profile_id = :profileId"); // 
 $profileStmt->bindParam(':profileId', $profileId);
 $profileStmt->execute();
-$profile = $profileStmt->fetch(PDO::FETCH_ASSOC);
+// ...
 
 // Fetch mobility impairment data
 $mobilityImpairmentStmt = $conn->prepare("
@@ -170,7 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <h4><?php echo htmlspecialchars($work['position']); ?> <span><?php echo htmlspecialchars($work['start_year']) . " - " . htmlspecialchars($work['end_year']); ?></span></h4>
                 <p><?php echo htmlspecialchars($work['company_name']); ?></p>
                 <p><?php echo htmlspecialchars($work['job_description']); ?></p>
-            </div>
+            </div>1
         <?php endforeach; ?>
     </div>
 
