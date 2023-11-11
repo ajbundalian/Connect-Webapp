@@ -145,7 +145,7 @@ foreach ($jobs as $index => $job) {
                     </div>
                     <div class="profile-links">
                         <a href="recommended-jobs.php"><ion-icon name="briefcase-outline" aria-hidden="true"></ion-icon> Recommended Jobs</a>
-                        <a href=""><ion-icon name="archive-outline" aria-hidden="true"></ion-icon> Connected Jobs</a>
+                        <a href="connected-jobs.php"><ion-icon name="archive-outline" aria-hidden="true"></ion-icon> Connected Jobs</a>
                         <a href="saved-jobs.php"><ion-icon name="bookmark-outline" aria-hidden="true"></ion-icon> Saved Jobs</a>
                     </div>
                 </aside>
