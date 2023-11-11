@@ -6,10 +6,7 @@
     <title>Information</title>
 </head>
 <style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 /*custom font*/
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
@@ -23,50 +20,101 @@ html {
     height: 100%;
     background: #7200F3; /* fallback for old browsers */
 }
+
 body {
     font-family: montserrat, arial, verdana;
     background: transparent;
 }
 
-.msform {
-    max-width: 600px; /* Adjust the form width */
-    margin: 0 auto; /* Center the form */
-    padding: 20px;
-    background: #f7f7f7; /* Form background color */
-    border-radius: 8px; /* Rounded corners */
+/*form styles*/
+#msform {
+    width: 80%;
+    margin: 50px auto;
 }
 
-.msform fieldset {
-    border: none;
-    margin: 0;
-    padding: 0;
+#msform fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 0px;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+    padding: 20px 30px;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 auto;
+
+    /*stacking fieldsets above each other*/
+    position: relative;
 }
 
-.msform .form-group {
-    margin-bottom: 20px; /* Space between inputs */
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+    display: none;
 }
 
-.msform .form-control {
-    border-radius: 4px; /* Rounded corners for inputs */
-    border: 1px solid #ced4da; /* Border color */
+/*inputs*/
+#msform input, #msform textarea {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2C3E50;
+    font-size: 13px;
 }
 
-.msform .form-control:focus {
-    border-color: #80bdff; /* Border color on focus */
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Shadow for focused inputs */
+#msform input:focus, #msform textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #ee0979;
+    outline-width: 0;
+    transition: All 0.5s ease-in;
+    -webkit-transition: All 0.5s ease-in;
+    -moz-transition: All 0.5s ease-in;
+    -o-transition: All 0.5s ease-in;
 }
 
-.msform .btn-primary {
-    background-color: #007bff; /* Primary button color */
-    border-color: #007bff; /* Primary button border color */
-    padding: 10px 15px; /* Button padding */
-    font-size: 16px; /* Button text size */
-    border-radius: 4px; /* Rounded corners for button */
+/*buttons*/
+#msform .action-button {
+    display: block;
+    width: 100px;
+    background: #7200F3;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 25px;
+    cursor: pointer;
+    padding: 10px 10px;
+    margin: 10px auto;
 }
 
-.msform .btn-primary:hover {
-    background-color: #0056b3; /* Button hover color */
-    border-color: #0056b3; /* Button hover border color */
+#msform .action-button:hover, #msform .action-button:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #7200F3;
+}
+
+
+#msform .action-button-previous:hover, #msform .action-button-previous:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
+}
+
+/*headings*/
+.fs-title {
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #2C3E50;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.fs-subtitle {
+    font-weight: normal;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
 }
 </style>
 
@@ -155,67 +203,61 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 <!-- Form for additional info -->
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-md-6 col-md-offset-3">
         <form id="msform" method="post">
             <fieldset>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="FirstName">First Name</label>
-                    <input type="text" name="first_name" class="form-control" id="FirstName" placeholder="First Name">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="LastName">Last Name</label>
-                    <input type="text" name="last_name" class="form-control" id="LastName" placeholder="Last Name">
-                </div>
-            </div>
-            <div class="form-group">
+                <h2 class="fs-title">Personal Details</h2>
+                <h3 class="fs-subtitle">Tell us something more about you</h3>
+
+                <label for="FirstName">First Name</label>
+                <input type="text" name="first_name" class="form-control" id="FirstName" placeholder="First Name">
+
+                <label for="LastName">Last Name</label>
+                <input type="text" name="last_name" class="form-control" id="LastName" placeholder="Last Name">
+
                 <label for="ContactNum">Contact Number</label>
                 <input type="text" name="contact_number" class="form-control" id="ContactNum" placeholder="09XXXXXXXX">
-            </div> 
-            <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="district">District</label>
-                        <select id="district" name="district" class="form-control">
-                            <option selected>Choose...</option>
-                                <?php foreach ($districts as $district): ?>
-                                    <option value="<?php echo htmlspecialchars($district['district_name']); ?>">
-                                    <?php echo htmlspecialchars($district['district_name']); ?>
-                                    </option>
+
+                <label for="district">District</label>
+                    <select id="district" name="district" class="form-control">
+                        <option selected>Choose...</option>
+                            <?php foreach ($districts as $district): ?>
+                                <option value="<?php echo htmlspecialchars($district['district_name']); ?>">
+                                <?php echo htmlspecialchars($district['district_name']); ?>
+                                </option>
                                 <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="city">City</label>
-                        <select id="city" name="city" class="form-control">
-                            <option selected>Choose...</option>
+                    </select>
+
+                <label for="city">City</label>
+                    <select id="city" name="city" class="form-control">
+                        <option selected>Choose...</option>
                                 <?php foreach ($cities as $city): ?>
                                 <option value="<?php echo htmlspecialchars($city['city_name']); ?>">
                                 <?php echo htmlspecialchars($city['city_name']); ?>
-                            </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                        <label for="pronouns">Pronouns</label>
-                        <select id="pronouns" name="pronouns" class="form-control">
-                            <option selected>Choose...</option>
-                            <?php foreach ($pronouns as $pronoun): ?>
+                        </option>
+                        <?php endforeach; ?>
+                    </select>
+
+                <label for="pronouns">Pronouns</label>
+                    <select id="pronouns" name="pronouns" class="form-control">
+                        <option selected>Choose...</option>
+                                    <?php foreach ($pronouns as $pronoun): ?>
                                     <option value="<?php echo htmlspecialchars($pronoun['pronoun_name']); ?>">
                                     <?php echo htmlspecialchars($pronoun['pronoun_name']); ?>
                                     </option>
                                 <?php endforeach; ?>
                         </select>
-                    </div>
-                </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+
+                <input type="submit" name="submit" class="submit action-button" value="Submit"/>
             </fieldset>
         </form>
     </div>
 </div>
 <!-- End of Form -->
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
