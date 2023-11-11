@@ -161,7 +161,7 @@ foreach ($jobs as $index => $job) {
         <?php foreach ($jobs as $job): ?>
         <div class="recently-job-card">
             <article class="recently-job-content">
-                <a class="job-card" href="job-listing.php?job_id=<?php echo $job['job_id']; ?>">
+                <a class="job-card" href="job-detail.php?job_id=<?php echo $job['job_id']; ?>">
                     <div class="company-picture-container">   
                         <img class="company-picture" src="/image/Connect Favicon (2).svg">
                     </div>
