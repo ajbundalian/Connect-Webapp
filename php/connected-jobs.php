@@ -52,11 +52,11 @@ $connectedJobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <body>
-    <!--Navigation Starts Here Here-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
+    <!-- Nav Starts Here -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <img src="/image/Connect Favicon (1).svg" alt="Connect Logo" height="50" width="50">
+          <a class="navbar-brand" href="applicant-homepage.php">
+            <img src="../image/Connect Favicon (1).svg" alt="Connect Logo" height="50" width="50">
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -65,28 +65,28 @@ $connectedJobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <div class=" collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto ">
               <li class="nav-item">
-                <a class="nav-link mx-2 active h5" aria-current="page" href="#">Home</a>
+                <a class="nav-link mx-2 active h5" aria-current="page" href="applicant-homepage.php">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link mx-2 h5" href="#">Jobs</a>
+                <a class="nav-link mx-2 h5" href="jobs.php">Jobs</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link mx-2 h5" href="#">Company</a>
+                <a class="nav-link mx-2 h5" href="company-directory.php">Company</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link mx-2 dropdown-toggle h5" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Account
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item h5" href="#">Profile</a></li>
-                  <li><a class="dropdown-item h5" href="#">Logout</a></li>
+                  <li><a class="dropdown-item h5" href="applicant-profilepage.php">Profile</a></li>
+                  <li><a class="dropdown-item h5" href="logout.php">Logout</a></li>
                 </ul>
               </li>
             </ul>
           </div>
         </div>
         </nav>
-<!--Navigation Ends Here-->
+<!-- Nav Ends Here -->
 
 <div class="container">
     <h1>Connected Jobs</h1>
@@ -94,7 +94,7 @@ $connectedJobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="job-grid">
         <?php foreach ($connectedJobs as $job): ?>
-            <a href="job_detail.php?job_id=<?php echo $job['job_id']; ?>" class="job-card">
+            <a href="job-detail.php?job_id=<?php echo $job['job_id']; ?>" data-job-id="<?php echo $job['job_id']; ?>" class="job-card">
                 <img src="/path/to/company/logos/<?php echo htmlspecialchars($job['company_pic']); ?>" alt="<?php echo htmlspecialchars($job['company_name']); ?>" class="company-logo">
                 <h3><?php echo htmlspecialchars($job['job_title']); ?></h3>
                 <p><strong><?php echo htmlspecialchars($job['company_name']); ?></strong></p>

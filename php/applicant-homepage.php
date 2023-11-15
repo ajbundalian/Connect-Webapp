@@ -14,7 +14,6 @@
 
 <?php
 session_start();
-
 // Redirect to login if not logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
@@ -94,8 +93,8 @@ foreach ($jobs as $index => $job) {
 <!--Navigation Starts Here Here-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <img src="/image/Connect Favicon (1).svg" alt="Connect Logo" height="50" width="50">
+          <a class="navbar-brand" href="applicant-homepage.php">
+            <img src="../image/Connect Favicon (1).svg" alt="Connect Logo" height="50" width="50">
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -104,21 +103,21 @@ foreach ($jobs as $index => $job) {
           <div class=" collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto ">
               <li class="nav-item">
-                <a class="nav-link mx-2 active h5" aria-current="page" href="#">Home</a>
+                <a class="nav-link mx-2 active h5" aria-current="page" href="applicant-homepage.php">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link mx-2 h5" href="#">Jobs</a>
+                <a class="nav-link mx-2 h5" href="jobs.php">Jobs</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link mx-2 h5" href="#">Company</a>
+                <a class="nav-link mx-2 h5" href="company-directory.php">Company</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link mx-2 dropdown-toggle h5" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Account
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item h5" href="#">Profile</a></li>
-                  <li><a class="dropdown-item h5" href="#">Logout</a></li>
+                  <li><a class="dropdown-item h5" href="applicant-profilepage.php">Profile</a></li>
+                  <li><a class="dropdown-item h5" href="logout.php">Logout</a></li>
                 </ul>
               </li>
             </ul>
@@ -138,7 +137,7 @@ foreach ($jobs as $index => $job) {
                         <p class="profile-text"> <?php echo htmlspecialchars($userInfo['district']); ?>, <?php echo htmlspecialchars($userInfo['city']); ?> </p>
                     </div>
                     <div class="edit-profile-button-container">
-                        <a href="#" class="edit-profile-button">
+                        <a href="applicant-profilepage.php" class="edit-profile-button">
                             <ion-icon name="create-outline"></ion-icon>
                             Edit Profile
                         </a>
@@ -154,14 +153,14 @@ foreach ($jobs as $index => $job) {
             <div class="right-container">
                 <div class="recently-jobs-tag">
                     <h2 class="r-tag">Recently Added Jobs</h2>
-                    <a href="#" class="view-all">View All</a>
+                    <a href="jobs.php" class="view-all">View All</a>
                 </div>
                 <div class="recently-jobs">
     <div class="recently-jobs-container">
         <?php foreach ($jobs as $job): ?>
         <div class="recently-job-card">
             <article class="recently-job-content">
-                <a class="job-card" href="job-detail.php?job_id=<?php echo $job['job_id']; ?>">
+                <a class="job-card" href="job-detail.php?job_id=<?php echo $job['job_id']; ?>" data-job-id="<?php echo $job['job_id']; ?>">
                     <div class="company-picture-container">   
                         <img class="company-picture" src="/image/Connect Favicon (2).svg">
                     </div>
@@ -193,7 +192,7 @@ foreach ($jobs as $index => $job) {
                     <?php foreach ($companies as $company): ?>
             <div class="recently-company-card">
                 <article class="recently-company-content">
-                    <a href="#" class="company-card">
+                    <a class="company-card" href="employer.php?company_id=<?php echo $company['company_id'];?>" company-id="<?php echo ($company['company_id']); ?>">
                         <div class="company-picture-container-parent">
                             <div class="company-picture-container2">
                                 <!-- Assuming company_logo contains the path to the logo image -->

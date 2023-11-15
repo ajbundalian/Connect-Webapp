@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" type="text/css" href="../css/job-listing.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="icon" type="image/x-icon" href="/image/Connect Favicon (1).svg">
-    <title>Job Details</title>
-</head>
-<body>
 <?php
 session_start();
-
-// Redirect to login if not logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
-
+$user_id = $_SESSION['user_id'];
+$job_id = $_GET['job_id'];
+include 'job-save-ajax.php';
+include 'job-connect-ajax.php';
+include 'job-report-ajax.php';
 // Database connection
-// 
 $host = 'localhost';
 $db   = 'connect';
 $user = 'root';
@@ -34,20 +23,7 @@ $options = [
     PDO::ATTR_EMULATE_PREPARES => false, 
 ];
 
-$user_id = $_SESSION['user_id'];
-
 $pdo = new PDO($dsn, $user, $pass, $options);
-
-// Check if job_id is provided
-if (!isset($_GET['job_id'])) {
-    echo "No job specified.";
-    exit(); // Or redirect to a different page
-}
-
-
-$job_id = $_GET['job_id'];
-$user_id = $_SESSION['user_id'] ?? null; // Make sure the user is logged in and user_id is set
-
 // Fetch job details
 $stmt = $pdo->prepare("SELECT * FROM jobs WHERE job_id = :job_id");
 $stmt->bindParam(':job_id', $job_id);
@@ -55,7 +31,6 @@ $stmt->execute();
 $job = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$job) {
-    echo "Job not found.";
     exit(); // Or handle appropriately
 }
 
@@ -149,15 +124,24 @@ $savedStmt->bindParam(':user_id', $user_id);
 $savedStmt->bindParam(':job_id', $job_id);
 $savedStmt->execute();
 $isSaved = $savedStmt->fetchColumn() > 0;
-
-// Handle form submissions for save, connect, and report in separate PHP scripts
-
-// Continue with HTML output below
 ?>
-    <!--Navigation Starts Here Here-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" type="text/css" href="../css/job-listing.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="../image/Connect Favicon (1).svg">
+    <title>Job Details</title>
+</head>
+<body>
+<!-- Nav Starts Here -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="applicant-homepage.php">
             <img src="../image/Connect Favicon (1).svg" alt="Connect Logo" height="50" width="50">
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -167,28 +151,28 @@ $isSaved = $savedStmt->fetchColumn() > 0;
           <div class=" collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto ">
               <li class="nav-item">
-                <a class="nav-link mx-2 active h5" aria-current="page" href="#">Home</a>
+                <a class="nav-link mx-2 active h5" aria-current="page" href="applicant-homepage.php">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link mx-2 h5" href="#">Jobs</a>
+                <a class="nav-link mx-2 h5" href="jobs.php">Jobs</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link mx-2 h5" href="#">Company</a>
+                <a class="nav-link mx-2 h5" href="company-directory.php">Company</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link mx-2 dropdown-toggle h5" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Account
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item h5" href="#">Profile</a></li>
-                  <li><a class="dropdown-item h5" href="#">Logout</a></li>
+                  <li><a class="dropdown-item h5" href="applicant-profilepage.php">Profile</a></li>
+                  <li><a class="dropdown-item h5" href="logout.php">Logout</a></li>
                 </ul>
               </li>
             </ul>
           </div>
         </div>
         </nav>
-<!--Navigation Ends Here-->
+<!-- Nav Ends Here -->
     
 <div class="job-listing-container">
     <header class="job-header">
@@ -199,27 +183,34 @@ $isSaved = $savedStmt->fetchColumn() > 0;
     <h2 class="job-title"><?php echo htmlspecialchars($job['job_title']); ?></h2>
     
     <div class="job-details">
-        <span class="job-type"><?php echo htmlspecialchars($job['job_type']); ?></span>
-        <span class="job-location"><?php echo htmlspecialchars($job['district']); ?>, <?php echo htmlspecialchars($job['city']); ?></span>
-        <span class="job_category"><?php echo htmlspecialchars($jobCategoryName); ?></span>
-        <span class="job_type"><?php echo htmlspecialchars($jobTypeName); ?></span>
-        <span class="exp_level"><?php echo htmlspecialchars($experienceLevelName); ?></span>
+        <span class="job-type">Working Arrangement: <?php echo htmlspecialchars($job['job_type']); ?>.</span>
+        <span class="job-location">Job Location: <?php echo htmlspecialchars($job['district']); ?>, <?php echo htmlspecialchars($job['city']); ?>.</span>
+        <span class="job_category">Job Category: <?php echo htmlspecialchars($jobCategoryName); ?>.</span>
+        <span class="job_type">Job Type: <?php echo htmlspecialchars($jobTypeName); ?>.</span>
+        <span class="exp_level">Experience Required: <?php echo htmlspecialchars($experienceLevelName); ?>.</span>
+        <span class="job-type">Salary Range: <?php echo htmlspecialchars($job['salary_range']); ?>.</span>
+        <span class="job-type">Overtime Availability: <?php echo htmlspecialchars($job['overtime']); ?>.</span>
     </div>
 
     <div class="job-details-2">
             <?php foreach ($disabilities as $disability): ?>
-                <span class="disability"><?php echo htmlspecialchars($disability['disability_name']); ?></span>
+                <span class="disability">Disability Supported: <?php echo htmlspecialchars($disability['disability_name']); ?></span>
             <?php endforeach; ?>
     </div>
 
     <div class="job-details-3">
-            <span class="date-posted"><?php echo htmlspecialchars($job['date_posted']); ?></span>
+            <span class="date-posted">Date Posted: <?php echo htmlspecialchars($job['date_posted']); ?></span>
     </div>
 
     <div class="action-buttons">
-        <button class="btn-save-btn">Save</button>
-        <button class="btn-connect-btn">Connect</button>
-        <button class="btn-report-btn">Report</button>
+    <button class="btn-save-btn" data-job-id="<?php echo htmlspecialchars($job_id); ?>">
+                <?php echo $isSaved ? 'Unsave' : 'Save'; ?>
+            </button>
+            <button class="btn-connect-btn" data-job-id= "<?php echo $job['job_id']; ?>" <?php if ($isConnected) echo 'disabled'; ?>>
+                <?php echo $isConnected ? 'Connected' : 'Connect'; ?>
+            </button>
+            <button  class="btn-report-btn" data-job-id= "<?php echo $job['job_id']; ?>">Report</button>
+
     </div>
 
     <section class="job-description">
@@ -241,7 +232,10 @@ $isSaved = $savedStmt->fetchColumn() > 0;
         </ul>
     </section>
 </div>
-
+<script>
+    var userId = <?php echo json_encode($_SESSION['user_id'] ?? null); ?>;
+</script>
+<script src="job-listing.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </html>
