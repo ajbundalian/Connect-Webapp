@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" type="text/css" href="../css/applicant-homepage.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="icon" type="image/x-icon" href="/image/Connect Favicon (1).svg">
+    <link rel="icon" type="image/x-icon" href="../image/Connect Favicon (1).svg">
     <title>Home</title>
 </head>
 <body>
@@ -17,6 +17,10 @@ session_start();
 // Redirect to login if not logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
+    exit();
+}
+if ($_SESSION['status'] !== 1) {
+    header('Location: employer-homepage.php'); 
     exit();
 }
 
@@ -57,7 +61,7 @@ $userInfo = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // Fetch the three latest jobs
 $stmt = $pdo->query("
-    SELECT j.job_id, j.job_title, cp.company_name
+    SELECT j.job_id, j.job_title, cp.company_name, cp.company_pic
     FROM jobs j
     JOIN company_profile cp ON j.user_id = cp.user_id
     ORDER BY j.date_posted DESC
@@ -131,7 +135,9 @@ foreach ($jobs as $index => $job) {
                 <aside class="profile-sidebar">
                     <div class="profile-container">
                         <div class="profile-image-wrapper">
-                            <div class="profile-image"></div>
+                            <div class="profile-image">
+                                <img src="../image/<?php echo $userInfo['photo']; ?>">
+                            </div>
                         </div>
                         <p class="profile-text">Welcome, <?php echo htmlspecialchars($userInfo['first_name']); ?>! </p>
                         <p class="profile-text"> <?php echo htmlspecialchars($userInfo['district']); ?>, <?php echo htmlspecialchars($userInfo['city']); ?> </p>
@@ -162,7 +168,7 @@ foreach ($jobs as $index => $job) {
             <article class="recently-job-content">
                 <a class="job-card" href="job-detail.php?job_id=<?php echo $job['job_id']; ?>" data-job-id="<?php echo $job['job_id']; ?>">
                     <div class="company-picture-container">   
-                        <img class="company-picture" src="/image/Connect Favicon (2).svg">
+                        <img class="company-picture" src="../image/<?php echo $job['company_pic']; ?>">
                     </div>
                     <p class="job-title"><?php echo htmlspecialchars($job['job_title']); ?> at <?php echo htmlspecialchars($job['company_name']); ?></p>
                     <div class="company-name-container">
@@ -196,7 +202,7 @@ foreach ($jobs as $index => $job) {
                         <div class="company-picture-container-parent">
                             <div class="company-picture-container2">
                                 <!-- Assuming company_logo contains the path to the logo image -->
-                                <img src="/path/to/logos/<?php echo htmlspecialchars($company['company_pic']); ?>" alt="" class="company-picture2">
+                                <img src="../image/<?php echo htmlspecialchars($company['company_pic']); ?>" alt="" class="company-picture2">
                                     </div>
                                 </div>
                                 <div class="company-name-container2">
