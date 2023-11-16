@@ -8,10 +8,6 @@
     <title>Information</title>
 </head>
 <style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 /*custom font*/
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
@@ -33,9 +29,8 @@ body {
 
 /*form styles*/
 #msform {
-    text-align: center;
-    position: relative;
-    margin-top: 30px;
+    width: 100%;
+    margin: 50px auto;
 }
 
 #msform fieldset {
@@ -45,8 +40,8 @@ body {
     box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
     padding: 20px 30px;
     box-sizing: border-box;
-    width: 80%;
-    margin: 0 10%;
+    width: 100%;
+    margin: 0 auto;
 
     /*stacking fieldsets above each other*/
     position: relative;
@@ -86,7 +81,7 @@ body {
 /*buttons*/
 #msform .action-button {
     width: 100px;
-    background: #ee0979;
+    background: #7200F3;
     font-weight: bold;
     color: white;
     border: 0 none;
@@ -97,7 +92,7 @@ body {
 }
 
 #msform .action-button:hover, #msform .action-button:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px #ee0979;
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #7200F3;
 }
 
 #msform .action-button-previous {
@@ -135,7 +130,7 @@ body {
 </style>
 <body>
 <!-- Form for additional info -->
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-md-6 col-md-offset-3">
         <form id="msform" method="post">
             <fieldset>
@@ -147,8 +142,8 @@ body {
                 <input type="text" id= "website" name="company_website" placeholder="Website"/>
                 <label for="companydesc">Describe your Company</label>
                 <textarea class="form-control" id="companydesc" name="company_desc" rows="3" placeholder="Tell us about your company"></textarea>
-                <label for="phone">Phone</label>
-                <input type="text" id= "phone" name="company_phone" placeholder="Phone"/>
+                <label for="phone">Phone Number</label>
+                <input type="text" id= "phone" name="company_phone" placeholder="09xxxxxxx"/>
                 <input type="submit" name="submit" class="submit action-button" value="Submit"/>
             </fieldset>
         </form>
@@ -231,4 +226,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>  
 </body>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </html>

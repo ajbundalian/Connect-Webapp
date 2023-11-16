@@ -10,7 +10,7 @@ body {
 }
 
 .job-listing-container {
-    max-width: 800px;
+    width: 90%;
     margin: 20px auto;
     background-color: #ffffff;
     padding: 20px;
@@ -31,15 +31,35 @@ body {
 }
 
 .job-title {
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
     margin: 20px 0;
+    text-align: center;
 }
 
 .job-details span {
+    font-size: 15px;
     display: inline-block;
     margin: 0 10px 10px 0;
-    background-color: #e8e8e8;
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.job-details-2 span {
+    font-size: 15px;
+    display: inline-block;
+    margin: 0 10px 10px 0;
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.job-details-3 span {
+    font-size: 15px;
+    display: inline-block;
+    margin: 0 10px 10px 0;
+    background-color: white;
     padding: 5px 10px;
     border-radius: 3px;
 }
