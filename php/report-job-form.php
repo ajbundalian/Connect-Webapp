@@ -47,6 +47,15 @@ label {
 <body>
 <?php
 session_start(); // Start the session if not already started
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
+  }
+  
+  if ($_SESSION['status'] !== 1) {
+    header('Location: employer-homepage.php');
+    exit(); 
+ }
 
 $jobId = $_GET['job_id'] ?? null; // Get job_id from URL
 $userId = $_SESSION['user_id'] ?? null; // Get user_id from session

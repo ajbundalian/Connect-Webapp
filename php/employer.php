@@ -10,6 +10,15 @@
 <?php
 // Start the session and include your database connection file here
 session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
+  }
+  
+  if ($_SESSION['status'] !== 1) {
+    header('Location: employer-homepage.php');
+    exit(); 
+}
 // Database connection
 $host = 'localhost';
 $db   = 'connect';
@@ -35,6 +44,7 @@ $stmt = $pdo->prepare("
             company_name, 
             company_desc, 
             company_phone, 
+            company_pic,
             CONCAT(district, ', ', city) AS location, 
             company_website 
         FROM 
@@ -71,6 +81,8 @@ if ($companyId) {
 
         }
     }
+        
+    
 
 ?>
 <style>
@@ -85,8 +97,7 @@ if ($companyId) {
 }
 
 body {
-    background: #654ea3;
-    background: linear-gradient(to right, #e96443, #904e95);
+    background: #22283B;
     min-height: 100vh;
     overflow-x: hidden;
 }
@@ -104,12 +115,24 @@ body {
     margin: 0 auto; /* Center the button inside the card */
 }
 
-a:hover{
+#job-card:hover{
 box-shadow: 9px 6px 19px 0px rgba(176,176,176,1);
 -webkit-box-shadow: 9px 6px 19px 0px rgba(176,176,176,1);
 -moz-box-shadow: 9px 6px 19px 0px rgba(176,176,176,1);
 }
 
+#img {
+    width: 250px;
+    height: 250px;
+}
+.container, .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#c_w{
+    text-decoration: none;
+}
 </style>
 <body>
 <!-- Nav Starts Here -->
@@ -149,14 +172,15 @@ box-shadow: 9px 6px 19px 0px rgba(176,176,176,1);
 <!-- Nav Ends Here -->
 
     <!--Nav Ends Here-->
+<div class="container-fluid">
 <div class="row py-5 px-4"> 
-    <div class="col-md-9 mx-auto"> 
+    <div class="col-12 mx-auto"> 
         <!-- Profile widget --> 
         <div class="bg-white shadow rounded overflow-hidden"> 
             <div class="px-4 pt-0 pb-4 cover"> 
                 <div class="media align-items-end profile-head"> 
                     <div class="profile mr-3">
-                        <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" width="130" class="rounded mb-2 img-thumbnail">
+                        <img src="../image/<?php echo htmlspecialchars($companyProfile['company_pic']); ?>" id="img" class="rounded mb-2 img-thumbnail">
                     </div> 
                         <div class="media-body mb-8 text-black"> 
                             <h4 class="mt-0 mb-0" id="Company Name"><?= htmlspecialchars($companyProfile['company_name']) ?></h4> 
@@ -176,7 +200,7 @@ box-shadow: 9px 6px 19px 0px rgba(176,176,176,1);
                                     <div class="py-4 px-4"> 
                                         <div class="d-flex align-items-center justify-content-between mb-3"> 
                                             <h5 class="mb-0 p-0">Recent Job Listing</h5>
-                                            <a href="<?= htmlspecialchars($fullUrl) ?>" class="btn btn-link btn-lg">Company Website</a> 
+                                            <a href="<?= htmlspecialchars($fullUrl) ?>" id="c_w" class="btn btn-link btn-lg">Website</a> 
                                         </div> 
                                         <div class="row"> 
                                             <div class="col-lg-6 mb-3 pr-lg-1">
@@ -193,7 +217,7 @@ box-shadow: 9px 6px 19px 0px rgba(176,176,176,1);
                                                     <div class="card-body d-flex flex-column justify-content-center">
                                                         <h2 class="card-title text-center"><?= htmlspecialchars($job['job_title']) ?></h2>
                                                         <p class="card-text text-center"><?= htmlspecialchars($jobDesc) ?></p>
-                                                        <a href="job-detail.php?job-id=<?= $job['job_id'] ?>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Read More</a>
+                                                        <a href="job-detail.php?job_id=<?php echo $job['job_id']; ?>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Read More</a>
                                                     </div>
                                                 </div>
                                              <!-- Job Card Ends here -->
@@ -201,6 +225,7 @@ box-shadow: 9px 6px 19px 0px rgba(176,176,176,1);
                                          <?php endforeach; ?> 
                                         </div> 
                                     </div>
+</div>
 </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

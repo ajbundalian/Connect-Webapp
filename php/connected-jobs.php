@@ -16,10 +16,14 @@ session_start();
 
 // Ensure the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit();
+  header('Location: login.php');
+  exit();
 }
 
+if ($_SESSION['status'] !== 1) {
+  header('Location: employer-homepage.php');
+  exit(); 
+}
 // Database connection
 // 
 $host = 'localhost';
@@ -95,7 +99,7 @@ $connectedJobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="job-grid">
         <?php foreach ($connectedJobs as $job): ?>
             <a href="job-detail.php?job_id=<?php echo $job['job_id']; ?>" data-job-id="<?php echo $job['job_id']; ?>" class="job-card">
-                <img src="/path/to/company/logos/<?php echo htmlspecialchars($job['company_pic']); ?>" alt="<?php echo htmlspecialchars($job['company_name']); ?>" class="company-logo">
+                <img src="../image/<?php echo htmlspecialchars($job['company_pic']); ?>" alt="<?php echo htmlspecialchars($job['company_name']); ?>" class="company-logo">
                 <h3><?php echo htmlspecialchars($job['job_title']); ?></h3>
                 <p><strong><?php echo htmlspecialchars($job['company_name']); ?></strong></p>
                 <p><?php echo htmlspecialchars($job['location']); ?></p>
@@ -117,6 +121,8 @@ function getStatusColor($status) {
             return 'red';
         case 'Pending':
             return '#7200F3'; // Hex code for the purple color
+        case 'pending':
+            return '#7200F3';
         default:
             return 'black'; // Default color
     }

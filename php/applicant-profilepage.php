@@ -6,7 +6,10 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
-
+if ($_SESSION['status'] !== 1) {
+    header('Location: employer-homepage.php'); 
+    exit();
+}
 $user_id = $_SESSION['user_id'];
 
 // Database connection
