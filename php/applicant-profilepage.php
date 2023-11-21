@@ -1,6 +1,4 @@
 <?php 
-session_start();
-
 // Redirect to login if not logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
@@ -324,34 +322,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $profileId = $profileId;
         $disabilityId = $_POST['disability'];
 
-    try {
-        // Prepare the insert statement
-        $stmt = $pdo->prepare("INSERT INTO profile_disability_junction (profile_id, disability_id) VALUES (:profile_id, :disability_id)");
-        
-        // Bind parameters
-        $stmt->bindParam(':profile_id', $profileId, PDO::PARAM_INT);
-        $stmt->bindParam(':disability_id', $disabilityId, PDO::PARAM_INT);
-        
-        // Execute the query
-        $stmt->execute();
-        
-        // Check if the insert was successful
-        if ($stmt->rowCount()) {
-            echo 'Disability added successfully.';
-        } else {
-            echo 'An error occurred. Disability not added.';
-        }
-    } catch (PDOException $e) {
-        // Handle potential errors, such as trying to add a duplicate entry
-        if ($e->getCode() == 23000) {
-            echo 'This disability is already added.';
-        } else {
+        try {
+            // First, check if the disability already exists for the user
+            $checkStmt = $pdo->prepare("SELECT * FROM profile_disability_junction WHERE profile_id = :profile_id AND disability_id = :disability_id");
+            $checkStmt->bindParam(':profile_id', $profileId, PDO::PARAM_INT);
+            $checkStmt->bindParam(':disability_id', $disabilityId, PDO::PARAM_INT);
+            $checkStmt->execute();
+    
+            if ($checkStmt->rowCount() == 1) {
+                echo 'This disability is already added.';
+            } else {
+                // Prepare the insert statement
+                $insertStmt = $pdo->prepare("INSERT INTO profile_disability_junction (profile_id, disability_id) VALUES (:profile_id, :disability_id)");
+                
+                // Bind parameters
+                $insertStmt->bindParam(':profile_id', $profileId, PDO::PARAM_INT);
+                $insertStmt->bindParam(':disability_id', $disabilityId, PDO::PARAM_INT);
+                
+                // Execute the query
+                $insertStmt->execute();
+                
+                // Check if the insert was successful
+                if ($insertStmt->rowCount()) {
+                    echo 'Disability added successfully.';
+                } else {
+                    echo 'An error occurred. Disability not added.';
+                }
+            }
+        } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
-            }
-        } else {
-            echo 'Invalid request.';
-        }
+    }
+
 }
     
     

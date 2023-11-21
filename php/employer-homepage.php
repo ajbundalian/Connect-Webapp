@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="../image/Connect Favicon (1).svg">
+    <title>Employer Homepage</title>
   </head>
 
 <?php
-session_start();
 // Redirect to login if not logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
@@ -20,6 +20,11 @@ if (!isset($_SESSION['user_id'])) {
 if ($_SESSION['status'] !== 2) {
   header('Location: applicant-homepage.php'); 
 exit();
+}
+
+if (isset($_SESSION['job_id'])) {
+  unset($_SESSION['job_id']);
+  exit();
 }
 // Database connection
 // 
@@ -52,7 +57,6 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if (count($jobs) === 0) {
   // No jobs found for this user_id
-  echo "<tr><td colspan='4'>No jobs found.</td></tr>";
 } else {
   foreach ($jobs as $job) {
       // Count the number of applicants for the job
@@ -184,7 +188,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
   <!--Nav Starts Here-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <img src="../image/Connect Favicon (1).svg" alt="Connect Logo" height="50" width="50">
@@ -196,20 +200,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class=" collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto ">
           <li class="nav-item">
-            <a class="nav-link mx-2 active h5" aria-current="page" href="#">Home</a>
+            <a class="nav-link mx-2 active h5" aria-current="page" href="employer-homepage.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link mx-2 h5" href="#">Jobs</a>
+            <a class="nav-link mx-2 h5" href="employer-jobs.php">Jobs</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link mx-2 h5" href="#">Applicants</a>
+            <a class="nav-link mx-2 h5" href="employer-applicant.php">Applicants</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link mx-2 dropdown-toggle h5" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Account
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item h5" href="#">Profile</a></li>
+              <li><a class="dropdown-item h5" href="employer-profilepage.php">Profile</a></li>
               <li><a class="dropdown-item h5" href="logout.php">Logout</a></li>
             </ul>
           </li>
@@ -225,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="container text-center">
         <h1 class="display-4 mb-4">Welcome,</h1>
         <p class="lead display-5"> <?php echo htmlspecialchars($userInfo['company_name']); ?> </p>
-          <a class="btn btn-outline-dark btn-lg" href="#" role="button"><ion-icon name="add" size="small"></ion-icon>Add A New Listing</a>
+          <a class="btn btn-outline-dark btn-lg" href="add-joblisting.php" role="button"><ion-icon name="add" size="small"></ion-icon>Add A New Listing</a>
       </div>
     </div>
             
@@ -257,7 +261,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                   </td>
                                   <td class="job-title"><?php echo htmlspecialchars($jobs['job_title']); ?></td>
                                   <td class="applicants"><?php echo htmlspecialchars($applicantCount['applicant_count']); ?></td>
-                                  <td><a href="#" class="btn btn-sm btn-success"><ion-icon name="search"></ion-icon></a></td>
+                                  <td><a href="employer-joblisting.php?job_id=<?php echo $jobs['job_id']; ?>" class="btn btn-sm btn-success"><ion-icon name="search"></ion-icon></a></td>
                               </tr>
                             <?php endforeach; ?>
                           </tbody>
@@ -281,7 +285,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script>
   function sortTable(column, isNumeric = false) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  var table = document.querySelector('.table.rounded');
+  var table = document.querySelector('.table.rounded-3');
   switching = true;
   // Set the sorting direction to ascending:
   dir = "asc";

@@ -10,7 +10,7 @@
 </head>
 <body>
 <?php
-session_start(); // Start the session at the beginning of the script
+// Start the session at the beginning of the script
 
 // Redirect users based on their status
 function redirectToDashboard($status) {

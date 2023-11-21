@@ -11,8 +11,6 @@
     <title>Connected Jobs</title>
 </head>
 <?php
-session_start();
-
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
   header('Location: login.php');
@@ -65,7 +63,11 @@ $disabilityStmt->bindParam(':profile_id', $profile_id);
 $disabilityStmt->execute();
 $userDisabilities = $disabilityStmt->fetchAll(PDO::FETCH_COLUMN);
 
+$noDisabilitiesFlag = false;
 
+if (count($userDisabilities) === 0) {
+  $noDisabilitiesFlag = true;
+} else {
 // Fetch the recommended jobs
 $placeholders = str_repeat('?,', count($userDisabilities) - 1) . '?';
 $jobStmt = $pdo->prepare("
@@ -92,11 +94,7 @@ foreach ($recommendedJobs as $index => $job) {
     $disabilityStmt->execute();
     $recommendedJobs[$index]['disabilities'] = $disabilityStmt->fetchAll(PDO::FETCH_ASSOC);
 }
-// Here we fetch the disabilities and directly assign them to the 'disabilities' key
-$jobs[$index]['disabilities'] = $disabilityStmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-// Now $recommendedJobs contains all the information needed to display recommended jobs
+}
 ?>
 
 <body>
@@ -137,6 +135,14 @@ $jobs[$index]['disabilities'] = $disabilityStmt->fetchAll(PDO::FETCH_ASSOC);
 <!-- Nav Ends Here -->
 
 <div class="container">
+  <?php if ($noDisabilitiesFlag): ?>
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h1 class="display-4">No Jobs Found</h1>
+            <p class="lead">Currently, there are no recommended jobs based on your profile.</p>
+          </div>
+        </div>
+    <?php else: ?>
     <h1>Recommended</h1>
     <p>You have <span id="jobCount"><?php echo count($recommendedJobs); ?></span> recommended jobs.</p>
 
@@ -156,6 +162,7 @@ $jobs[$index]['disabilities'] = $disabilityStmt->fetchAll(PDO::FETCH_ASSOC);
             </a>
         <?php endforeach; ?>
     </div>
+    <?php endif; ?>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

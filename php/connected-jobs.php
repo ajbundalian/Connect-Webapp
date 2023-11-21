@@ -12,7 +12,6 @@
 </head>
 
 <?php
-session_start();
 
 // Ensure the user is logged in
 if (!isset($_SESSION['user_id'])) {

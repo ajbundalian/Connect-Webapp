@@ -84,7 +84,6 @@
 </head>
 <body>
 <?php
-session_start();
 // Redirect to login if not logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
@@ -162,69 +161,72 @@ while ($row = $stmt->fetch()) {
 $query = "SELECT DISTINCT j.job_id FROM jobs j";
 
 // For joining with many-to-many relationship tables
-$joins = "";
-
-// Storing parameters for binding later
+$conditions = [];
 $params = [];
 
-// Check for search input and append to query
+//Check for disability
+if (!empty($_POST['disability'])) {
+    $query .= " JOIN job_disability_junction jdj ON j.job_id = jdj.job_id";
+    $conditions[] = " jdj.disability_id = :disability";
+    $params[':disability'] = $_POST['disability'];
+}
+
+// Check for search input
 if (!empty($_POST['search'])) {
-    $query .= " WHERE j.job_title LIKE :search";
+    $conditions[] = " j.job_title LIKE :search";
     $params[':search'] = '%' . $_POST['search'] . '%';
 }
 
-// Check for category filter
+// Check for job category filter
 if (!empty($_POST['job_category'])) {
-    $query .= " AND j.job_cat_id = :job_category";
+    $conditions[] = " j.job_cat_id = :job_category";
     $params[':job_category'] = $_POST['job_category'];
 }
 
 // Check for experience level filter
 if (!empty($_POST['exp_level'])) {
-    $query .= " AND j.exp_level_id = :exp_level";
+    $conditions[] = " j.exp_level_id = :exp_level";
     $params[':exp_level'] = $_POST['exp_level'];
 }
 
 // Check for job type filter
 if (!empty($_POST['job_type'])) {
-    $query .= " AND j.job_type_id = :job_type";
+    $conditions[] = " j.job_type_id = :job_type";
     $params[':job_type'] = $_POST['job_type'];
 }
 
 // Check for district filter
 if (!empty($_POST['district'])) {
-    $query .= " AND j.district_id = :district";
+    $conditions[] = " j.district = :district";
     $params[':district'] = $_POST['district'];
 }
 
-// Check for disability filter
-if (!empty($_POST['disability'])) {
-    $joins .= " JOIN job_disability_junction jdj ON j.job_id = jdj.job_id";
-    $query .= " AND jdj.disability_id = :disability";
-    $params[':disability'] = $_POST['disability'];
-}
 
 // Check for accessibility checkboxes
 if (!empty($_POST['accessibility'])) {
     $accessibilityIds = $_POST['accessibility'];
-    $joins .= " JOIN job_accessibility_junction jaj ON j.job_id = jaj.job_id";
-    $query .= " AND jaj.accessibility_id IN (" . implode(',', array_fill(0, count($accessibilityIds), '?')) . ")";
-    $params = array_merge($params, $accessibilityIds);
+    $query .= " JOIN job_accessibility_junction jaj ON j.job_id = jaj.job_id";
+    
+    // Convert accessibility IDs to named parameters
+    $accessibilityConditions = [];
+    foreach ($accessibilityIds as $index => $id) {
+        $param = ':accessibility' . $index;
+        $accessibilityConditions[] = $param;
+        $params[$param] = $id;
+    }
+    // Ensure the WHERE clause is added only once
+    $query .= (count($conditions) > 0 ? " AND" : " WHERE") . " jaj.accessibility_id IN (" . implode(',', $accessibilityConditions) . ")";
 }
 
-// Combine base query with joins and additional conditions
-$query = $query . $joins;
-
+if (!empty($conditions)) {
+    $query .= " WHERE " . implode(' AND', $conditions);
+}
 // Prepare the statement
 $stmt = $pdo->prepare($query);
 
 // Bind parameters
 foreach ($params as $key => &$val) {
-    if (is_int($key)) {
-        $stmt->bindValue($key + 1, $val); // Bind value for accessibility IDs
-    } else {
-        $stmt->bindValue($key, $val);
-    }
+    $stmt->bindValue($key, $val);
 }
 
 // Execute the query

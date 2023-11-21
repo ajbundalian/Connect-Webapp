@@ -1,5 +1,4 @@
 <?php
-session_start();
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
@@ -230,10 +229,9 @@ $isSaved = $savedStmt->fetchColumn() > 0;
     <section class="accessibility-features">
         <h3>Accessibility</h3>
         <ul>
-            <li>Accessible Devices</li>
-            <li>Accessible Building</li>
-            <li>Accessible Work Environment</li>
-            <li>In-Person Assistance</li>
+            <?php foreach ($accessibilities as $accessibility): ?>
+                <i><?php echo htmlspecialchars($accessibility['accessibility_tag']); ?></i>
+            <?php endforeach; ?>
         </ul>
     </section>
 </div>

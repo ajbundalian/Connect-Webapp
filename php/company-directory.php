@@ -73,6 +73,10 @@ try {
   margin-bottom: auto; /* Pushes everything else down */
   }
 
+  a{
+    text-decoration: none;
+  }
+
   .company-card p {
   margin-top: auto; /* Pushes the paragraph to the bottom */
   }

@@ -153,7 +153,6 @@ body {
 
 <?php
 // Start the session
-session_start();
 // Include your database connection file here
 // require 'path/to/your/database/connection/file.php';
 

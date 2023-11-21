@@ -46,7 +46,6 @@ label {
 </style>
 <body>
 <?php
-session_start(); // Start the session if not already started
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
