@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax'])) {
     $pdo = new PDO($dsn, $user, $pass, $options);
     
     $job_id = $_POST['job_id'];
-    $status = 'pending';
+    $status = 'Pending';
     $date_applied = date('m/d/Y');
 
     // Insert the connection

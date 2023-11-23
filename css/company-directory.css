@@ -32,7 +32,6 @@ body {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     padding: 40px;
-    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -78,11 +77,20 @@ body {
     .company-grid {
         grid-template-columns: repeat(1, 1fr);
     }
+    .company-directory p {
+        font-size: 40px; /* Adjust font size for smaller screens */
+    }
 }
 
 @media screen and (max-width: 768px) {
     .company-logo {
         width: 60%;
         height: 60%;
+    }
+}
+
+@media screen and (max-width: 992px) and (min-width: 769px) {
+    .company-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }

@@ -10,7 +10,7 @@
 </head>
 <body>
 <?php
-session_start(); // Start the session at the beginning of the script
+// Start the session at the beginning of the script
 
 // Redirect users based on their status
 function redirectToDashboard($status) {
@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 } 
             elseif ($_SESSION['status'] == 2) {
             // User is a company, query the company table
-            $stmt = $pdo->prepare("SELECT company_id FROM company WHERE user_id = :user_id");
+            $stmt = $pdo->prepare("SELECT company_id FROM company_profile WHERE user_id = :user_id");
             } 
             else {
             // If status is not 1 or 2, handle the error appropriately

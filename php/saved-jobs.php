@@ -13,11 +13,15 @@
 
 <body>
 <?php
-session_start();
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit();
+  header('Location: login.php');
+  exit();
+}
+
+if ($_SESSION['status'] !== 1) {
+  header('Location: employer-homepage.php');
+  exit(); 
 }
 
 // Database connection
